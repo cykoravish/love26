@@ -137,49 +137,144 @@
   });
 
   /* ==================================
-     6) MUSIC PLAYER
+     6) MUSIC PLAYER WITH PLAYLIST
      ================================== */
+  var playlist = [
+    { src: "music/music1.mp3", title: "Romantic Melody" },
+    { src: "music/music2.mp3", title: "Heartfelt Serenade" },
+    { src: "music/music3.mp3", title: "Love in the Air" }
+  ];
+
+  var currentTrackIndex = 0;
   var isPlaying = false;
+  var isShuffled = false;
+
+  var trackTitle = document.getElementById("track-title");
+  var prevBtn = document.getElementById("prev-btn");
+  var nextBtn = document.getElementById("next-btn");
+  var shuffleBtn = document.getElementById("shuffle-btn");
+  var trackItems = document.querySelectorAll(".track-item");
+
+  function loadTrack(index) {
+    if (!bgMusic) return;
+    currentTrackIndex = index;
+    bgMusic.src = playlist[index].src;
+    if (trackTitle) trackTitle.textContent = playlist[index].title;
+    updateActiveTrackUI();
+  }
+
+  function updateActiveTrackUI() {
+    trackItems.forEach(function (item) {
+      var idx = parseInt(item.getAttribute("data-index"), 10);
+      var icon = item.querySelector(".track-playing-icon");
+      var numEl = item.querySelector(".track-number");
+      if (idx === currentTrackIndex) {
+        item.classList.add("bg-rose-50");
+        if (icon) icon.classList.remove("hidden");
+        if (numEl) {
+          numEl.classList.remove("bg-rose-100", "text-rose-500");
+          numEl.classList.add("bg-rose-600", "text-white");
+        }
+      } else {
+        item.classList.remove("bg-rose-50");
+        if (icon) icon.classList.add("hidden");
+        if (numEl) {
+          numEl.classList.remove("bg-rose-600", "text-white");
+          numEl.classList.add("bg-rose-100", "text-rose-500");
+        }
+      }
+    });
+  }
+
+  function playCurrentTrack() {
+    if (!bgMusic) return;
+    bgMusic.play().then(function () {
+      isPlaying = true;
+      if (playIcon) playIcon.classList.add("hidden");
+      if (pauseIcon) pauseIcon.classList.remove("hidden");
+      musicBars.forEach(function (bar) {
+        bar.classList.add("playing");
+      });
+    }).catch(function (err) {
+      console.warn("Audio playback was prevented:", err);
+    });
+  }
+
+  function pauseCurrentTrack() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    isPlaying = false;
+    if (playIcon) playIcon.classList.remove("hidden");
+    if (pauseIcon) pauseIcon.classList.add("hidden");
+    musicBars.forEach(function (bar) {
+      bar.classList.remove("playing");
+    });
+  }
 
   function toggleMusic() {
     if (!bgMusic) return;
-
+    // If no track loaded yet, load first
+    if (!bgMusic.src || bgMusic.src === window.location.href) {
+      loadTrack(0);
+    }
     if (isPlaying) {
-      bgMusic.pause();
-      isPlaying = false;
-      if (playIcon) playIcon.classList.remove("hidden");
-      if (pauseIcon) pauseIcon.classList.add("hidden");
-      musicBars.forEach(function (bar) {
-        bar.classList.remove("playing");
-      });
+      pauseCurrentTrack();
     } else {
-      bgMusic.play().then(function () {
-        isPlaying = true;
-        if (playIcon) playIcon.classList.add("hidden");
-        if (pauseIcon) pauseIcon.classList.remove("hidden");
-        musicBars.forEach(function (bar) {
-          bar.classList.add("playing");
-        });
-      }).catch(function (err) {
-        // Autoplay may be blocked; silently fail
-        console.warn("Audio playback was prevented:", err);
-      });
+      playCurrentTrack();
     }
   }
 
-  if (musicToggle) {
-    musicToggle.addEventListener("click", toggleMusic);
+  function playNext() {
+    if (isShuffled) {
+      var randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * playlist.length);
+      } while (randomIndex === currentTrackIndex && playlist.length > 1);
+      loadTrack(randomIndex);
+    } else {
+      var nextIndex = (currentTrackIndex + 1) % playlist.length;
+      loadTrack(nextIndex);
+    }
+    playCurrentTrack();
   }
 
-  // Handle audio ending
+  function playPrev() {
+    var prevIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+    loadTrack(prevIndex);
+    playCurrentTrack();
+  }
+
+  // Button listeners
+  if (musicToggle) musicToggle.addEventListener("click", toggleMusic);
+  if (nextBtn) nextBtn.addEventListener("click", playNext);
+  if (prevBtn) prevBtn.addEventListener("click", playPrev);
+
+  if (shuffleBtn) {
+    shuffleBtn.addEventListener("click", function () {
+      isShuffled = !isShuffled;
+      if (isShuffled) {
+        shuffleBtn.classList.remove("bg-rose-100", "text-rose-600");
+        shuffleBtn.classList.add("bg-rose-600", "text-white");
+      } else {
+        shuffleBtn.classList.remove("bg-rose-600", "text-white");
+        shuffleBtn.classList.add("bg-rose-100", "text-rose-600");
+      }
+    });
+  }
+
+  // Clicking on a track in the playlist
+  trackItems.forEach(function (item) {
+    item.addEventListener("click", function () {
+      var idx = parseInt(this.getAttribute("data-index"), 10);
+      loadTrack(idx);
+      playCurrentTrack();
+    });
+  });
+
+  // When a track ends, auto-play next
   if (bgMusic) {
     bgMusic.addEventListener("ended", function () {
-      isPlaying = false;
-      if (playIcon) playIcon.classList.remove("hidden");
-      if (pauseIcon) pauseIcon.classList.add("hidden");
-      musicBars.forEach(function (bar) {
-        bar.classList.remove("playing");
-      });
+      playNext();
     });
   }
 

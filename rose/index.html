@@ -91,7 +91,7 @@
     <!-- Background image -->
     <div class="absolute inset-0">
       <img
-        src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=1920&q=80"
+        src="images/hero-bg.jpg"
         alt="Beautiful red roses background"
         class="w-full h-full object-cover"
       />
@@ -129,7 +129,7 @@
   </section>
 
   <!-- ========== MESSAGE SECTION ========== -->
-  <section id="message" class="py-24 md:py-32 bg-cream">
+  <section id="message" class="py-16 md:py-20 bg-cream">
     <div class="max-w-4xl mx-auto px-6">
       <div class="text-center mb-12 scroll-reveal">
         <p class="text-gold uppercase text-sm tracking-[0.2em] mb-4">A Note From the Heart</p>
@@ -156,9 +156,9 @@
   </section>
 
   <!-- ========== DIGITAL ROSES SECTION ========== -->
-  <section id="roses" class="py-24 md:py-32 bg-gradient-to-b from-cream to-rose-50">
+  <section id="roses" class="py-16 md:py-20 bg-gradient-to-b from-cream to-rose-50">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16 scroll-reveal">
+      <div class="text-center mb-10 scroll-reveal">
         <p class="text-gold uppercase text-sm tracking-[0.2em] mb-4">Pick a Rose</p>
         <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-rose-900 mb-4">Digital Roses</h2>
         <p class="font-body text-rose-600 text-lg max-w-xl mx-auto">
@@ -188,7 +188,7 @@
           <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
             <div class="aspect-[4/3] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1518882323805-05d0596e207f?w=600&q=80"
+                src="images/rose-pink.jpg"
                 alt="Pink roses in soft light"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -236,7 +236,7 @@
           <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
             <div class="aspect-[4/3] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1548460334-89b5c0e4856e?w=600&q=80"
+                src="images/rose-elegant.jpg"
                 alt="Elegant roses arrangement"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -252,7 +252,7 @@
           <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
             <div class="aspect-[4/3] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&q=80"
+                src="images/rose-garden.jpg"
                 alt="Beautiful red roses in garden"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -267,7 +267,7 @@
   </section>
 
   <!-- ========== MUSIC SECTION ========== -->
-  <section id="music" class="py-24 md:py-32 bg-rose-50">
+  <section id="music" class="py-16 md:py-20 bg-rose-50">
     <div class="max-w-2xl mx-auto px-6 text-center">
       <div class="scroll-reveal">
         <p class="text-gold uppercase text-sm tracking-[0.2em] mb-4">Set the Mood</p>
@@ -280,10 +280,11 @@
       <div class="scroll-reveal">
         <div class="bg-white rounded-2xl shadow-lg shadow-rose-200/40 p-8 md:p-10 border border-rose-100 inline-block w-full max-w-md">
           <!-- Audio element -->
-          <audio id="bg-music" preload="none">
-            <source src="https://cdn.pixabay.com/audio/2024/11/01/audio_4956b4eedc.mp3" type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
+          <audio id="bg-music" preload="auto"></audio>
+
+          <!-- Now Playing label -->
+          <p id="now-playing" class="text-rose-400 text-xs uppercase tracking-widest mb-1">Now Playing</p>
+          <p id="track-title" class="font-heading text-lg text-rose-800 mb-5">Select a track</p>
 
           <!-- Visualizer bars -->
           <div class="flex items-end justify-center gap-1 h-16 mb-6" id="music-visualizer">
@@ -302,21 +303,67 @@
             <div class="music-bar w-1.5 bg-rose-300 rounded-full" style="height: 25%"></div>
           </div>
 
-          <!-- Play/Pause Button -->
-          <button
-            id="music-toggle"
-            class="w-16 h-16 rounded-full bg-rose-600 text-white flex items-center justify-center mx-auto glow-btn hover:bg-rose-500 transition-all duration-300 mb-4"
-            aria-label="Play or pause music"
-          >
-            <svg id="play-icon" class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-            <svg id="pause-icon" class="w-7 h-7 hidden" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-            </svg>
-          </button>
+          <!-- Player Controls: Prev / Play-Pause / Next / Shuffle -->
+          <div class="flex items-center justify-center gap-5 mb-6">
+            <!-- Previous -->
+            <button id="prev-btn" class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center hover:bg-rose-200 transition-colors duration-200" aria-label="Previous track">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+              </svg>
+            </button>
 
-          <p class="text-rose-400 text-sm">Best experienced with headphones</p>
+            <!-- Play / Pause -->
+            <button
+              id="music-toggle"
+              class="w-16 h-16 rounded-full bg-rose-600 text-white flex items-center justify-center glow-btn hover:bg-rose-500 transition-all duration-300"
+              aria-label="Play or pause music"
+            >
+              <svg id="play-icon" class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg id="pause-icon" class="w-7 h-7 hidden" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              </svg>
+            </button>
+
+            <!-- Next -->
+            <button id="next-btn" class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center hover:bg-rose-200 transition-colors duration-200" aria-label="Next track">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+              </svg>
+            </button>
+
+            <!-- Shuffle -->
+            <button id="shuffle-btn" class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center hover:bg-rose-200 transition-colors duration-200" aria-label="Shuffle tracks">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Track List -->
+          <div class="border-t border-rose-100 pt-5">
+            <p class="text-rose-400 text-xs uppercase tracking-widest mb-3">Playlist</p>
+            <div class="flex flex-col gap-2" id="track-list">
+              <button class="track-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl hover:bg-rose-50 transition-colors duration-200" data-index="0">
+                <span class="track-number w-6 h-6 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-xs font-medium flex-shrink-0">1</span>
+                <span class="font-body text-sm text-rose-800 flex-1">Romantic Melody</span>
+                <svg class="track-playing-icon w-4 h-4 text-rose-500 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v9.28a4.39 4.39 0 00-1.5-.28C8.01 12 6 13.79 6 16s2.01 4 4.5 4S15 18.21 15 16V6h3V3h-6z"/></svg>
+              </button>
+              <button class="track-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl hover:bg-rose-50 transition-colors duration-200" data-index="1">
+                <span class="track-number w-6 h-6 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-xs font-medium flex-shrink-0">2</span>
+                <span class="font-body text-sm text-rose-800 flex-1">Heartfelt Serenade</span>
+                <svg class="track-playing-icon w-4 h-4 text-rose-500 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v9.28a4.39 4.39 0 00-1.5-.28C8.01 12 6 13.79 6 16s2.01 4 4.5 4S15 18.21 15 16V6h3V3h-6z"/></svg>
+              </button>
+              <button class="track-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl hover:bg-rose-50 transition-colors duration-200" data-index="2">
+                <span class="track-number w-6 h-6 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-xs font-medium flex-shrink-0">3</span>
+                <span class="font-body text-sm text-rose-800 flex-1">Love in the Air</span>
+                <svg class="track-playing-icon w-4 h-4 text-rose-500 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v9.28a4.39 4.39 0 00-1.5-.28C8.01 12 6 13.79 6 16s2.01 4 4.5 4S15 18.21 15 16V6h3V3h-6z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <p class="text-rose-400 text-sm mt-5">Best experienced with headphones</p>
         </div>
       </div>
     </div>
@@ -332,7 +379,14 @@
       <p class="font-heading text-lg md:text-xl text-rose-200 italic mb-2">
         Made with love for the people who make life beautiful.
       </p>
-      <p class="text-rose-500 text-sm">Happy Rose Day 2026</p>
+      <p class="text-rose-500 text-sm mb-4">Happy Rose Day 2026</p>
+      <div class="flex items-center justify-center gap-2 text-rose-400 text-sm">
+        <span>Made by</span>
+        <a href="https://github.com/cykoravish" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-rose-300 hover:text-gold-light transition-colors duration-300 font-medium">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Ravish
+        </a>
+      </div>
     </div>
   </footer>
 
