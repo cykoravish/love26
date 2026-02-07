@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Rose Day</title>
+  <meta name="description" content="A digital rose for the people who make life beautiful. Happy Rose Day!" />
+  <meta name="theme-color" content="#9f1239" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              300: '#fda4af',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+              950: '#4c0519',
+            },
+            cream: '#fdf8f0',
+            gold: {
+              light: '#f5d485',
+              DEFAULT: '#d4a017',
+              dark: '#a67c00',
+            },
+            blush: '#fce7f3',
+          },
+          fontFamily: {
+            heading: ['"Playfair Display"', 'serif'],
+            body: ['"Lato"', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="font-body bg-cream text-rose-950 antialiased">
+
+  <!-- ========== NAVBAR ========== -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="font-heading text-xl font-semibold tracking-wide text-white nav-brand transition-colors duration-300">
+        Rose Day
+      </a>
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="md:hidden text-white nav-link-color transition-colors duration-300" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#message" class="text-sm font-medium text-white/80 nav-link-color hover:text-gold-light transition-colors duration-300">Message</a>
+        <a href="#roses" class="text-sm font-medium text-white/80 nav-link-color hover:text-gold-light transition-colors duration-300">Roses</a>
+        <a href="#music" class="text-sm font-medium text-white/80 nav-link-color hover:text-gold-light transition-colors duration-300">Music</a>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-rose-900/95 backdrop-blur-md border-t border-rose-700/30">
+      <div class="px-6 py-4 flex flex-col gap-4">
+        <a href="#message" class="text-sm font-medium text-white/90 hover:text-gold-light transition-colors duration-300 mobile-nav-link">Message</a>
+        <a href="#roses" class="text-sm font-medium text-white/90 hover:text-gold-light transition-colors duration-300 mobile-nav-link">Roses</a>
+        <a href="#music" class="text-sm font-medium text-white/90 hover:text-gold-light transition-colors duration-300 mobile-nav-link">Music</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=1920&q=80"
+        alt="Beautiful red roses background"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-rose-950/70 via-rose-900/50 to-rose-950/80"></div>
+    </div>
+    <!-- Floating petals layer -->
+    <div class="absolute inset-0 pointer-events-none" id="petals-container"></div>
+    <!-- Content -->
+    <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
+      <p class="text-gold-light text-sm uppercase tracking-[0.3em] mb-6 opacity-0 hero-fade-in" style="animation-delay: 0.2s;">
+        Valentine's Week
+      </p>
+      <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-6 opacity-0 hero-fade-in" style="animation-delay: 0.5s;">
+        Happy Rose Day
+      </h1>
+      <p class="font-heading text-lg sm:text-xl md:text-2xl text-rose-100 italic leading-relaxed mb-10 opacity-0 hero-fade-in" style="animation-delay: 0.8s;">
+        This rose is for you &mdash; for every smile you bring into my life.
+      </p>
+      <a
+        href="#roses"
+        class="inline-block px-8 py-4 bg-rose-600 text-white font-medium rounded-full glow-btn hover:bg-rose-500 transition-all duration-300 opacity-0 hero-fade-in"
+        style="animation-delay: 1.1s;"
+      >
+        Send a Rose
+      </a>
+    </div>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 opacity-0 hero-fade-in" style="animation-delay: 1.5s;">
+      <div class="scroll-indicator">
+        <svg class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MESSAGE SECTION ========== -->
+  <section id="message" class="py-24 md:py-32 bg-cream">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12 scroll-reveal">
+        <p class="text-gold uppercase text-sm tracking-[0.2em] mb-4">A Note From the Heart</p>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-rose-900 mb-2">For You, With Love</h2>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg shadow-rose-200/40 p-8 md:p-12 border border-rose-100 scroll-reveal">
+        <div class="max-w-2xl mx-auto text-center">
+          <svg class="w-10 h-10 text-rose-300 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <p class="font-body text-lg md:text-xl text-rose-800 leading-relaxed mb-6">
+            Some people walk into your life and leave footprints on your heart forever. You are one of those rare souls who makes the world brighter just by being in it.
+          </p>
+          <p class="font-body text-lg md:text-xl text-rose-800 leading-relaxed mb-6">
+            This Rose Day, I want you to know that your kindness, your laughter, and your presence are gifts I treasure more than words can say.
+          </p>
+          <p class="font-heading text-xl md:text-2xl text-rose-600 italic">
+            &ldquo;A single rose can be my garden&hellip; a single friend, my world.&rdquo;
+          </p>
+          <p class="text-sm text-rose-400 mt-3">&mdash; Leo Buscaglia</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DIGITAL ROSES SECTION ========== -->
+  <section id="roses" class="py-24 md:py-32 bg-gradient-to-b from-cream to-rose-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16 scroll-reveal">
+        <p class="text-gold uppercase text-sm tracking-[0.2em] mb-4">Pick a Rose</p>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-rose-900 mb-4">Digital Roses</h2>
+        <p class="font-body text-rose-600 text-lg max-w-xl mx-auto">
+          Each rose carries a special message. Click on one to reveal the words meant just for you.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rose Card 1 -->
+        <div class="rose-card scroll-reveal cursor-pointer group" data-message="You bring so much joy into every room you enter. Never stop being your beautiful, authentic self. The world needs your light.">
+          <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=600&q=80"
+                alt="A single beautiful red rose"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-5 text-center">
+              <p class="font-heading text-lg text-rose-800 italic">For your smile</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rose Card 2 -->
+        <div class="rose-card scroll-reveal cursor-pointer group" data-message="Your kindness is a rare and precious gift. Thank you for always being there, for always caring, and for making the world a gentler place.">
+          <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1518882323805-05d0596e207f?w=600&q=80"
+                alt="Pink roses in soft light"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-5 text-center">
+              <p class="font-heading text-lg text-rose-800 italic">For your kindness</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rose Card 3 -->
+        <div class="rose-card scroll-reveal cursor-pointer group" data-message="In a world full of noise, you are a melody. Your strength and grace inspire everyone around you. Keep blooming beautifully.">
+          <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1496062031456-07b8f162a322?w=600&q=80"
+                alt="Red rose close up with dew drops"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-5 text-center">
+              <p class="font-heading text-lg text-rose-800 italic">For your strength</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rose Card 4 -->
+        <div class="rose-card scroll-reveal cursor-pointer group" data-message="Your laughter is the most beautiful sound. It has the power to turn any dark day into one full of sunshine. Never lose that magic.">
+          <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1559563362-c667ba5f5480?w=600&q=80"
+                alt="Bouquet of fresh roses"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-5 text-center">
+              <p class="font-heading text-lg text-rose-800 italic">For your laughter</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rose Card 5 -->
+        <div class="rose-card scroll-reveal cursor-pointer group" data-message="Every moment spent with you is a memory I hold close to my heart. You make life more beautiful simply by being part of it.">
+          <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1548460334-89b5c0e4856e?w=600&q=80"
+                alt="Elegant roses arrangement"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-5 text-center">
+              <p class="font-heading text-lg text-rose-800 italic">For the memories</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rose Card 6 -->
+        <div class="rose-card scroll-reveal cursor-pointer group" data-message="You are loved. You are valued. You are enough. Never forget that there are people in this world who cherish you deeply. Happy Rose Day!">
+          <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&q=80"
+                alt="Beautiful red roses in garden"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-5 text-center">
+              <p class="font-heading text-lg text-rose-800 italic">For being you</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MUSIC SECTION ========== -->
+  <section id="music" class="py-24 md:py-32 bg-rose-50">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <div class="scroll-reveal">
+        <p class="text-gold uppercase text-sm tracking-[0.2em] mb-4">Set the Mood</p>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-rose-900 mb-4">A Melody for You</h2>
+        <p class="font-body text-rose-600 text-lg mb-10 max-w-md mx-auto">
+          Close your eyes, press play, and let the music carry you to a place of warmth and love.
+        </p>
+      </div>
+
+      <div class="scroll-reveal">
+        <div class="bg-white rounded-2xl shadow-lg shadow-rose-200/40 p-8 md:p-10 border border-rose-100 inline-block w-full max-w-md">
+          <!-- Audio element -->
+          <audio id="bg-music" preload="none">
+            <source src="https://cdn.pixabay.com/audio/2024/11/01/audio_4956b4eedc.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+
+          <!-- Visualizer bars -->
+          <div class="flex items-end justify-center gap-1 h-16 mb-6" id="music-visualizer">
+            <div class="music-bar w-1.5 bg-rose-300 rounded-full" style="height: 20%"></div>
+            <div class="music-bar w-1.5 bg-rose-400 rounded-full" style="height: 40%"></div>
+            <div class="music-bar w-1.5 bg-rose-500 rounded-full" style="height: 60%"></div>
+            <div class="music-bar w-1.5 bg-rose-600 rounded-full" style="height: 80%"></div>
+            <div class="music-bar w-1.5 bg-rose-500 rounded-full" style="height: 50%"></div>
+            <div class="music-bar w-1.5 bg-rose-400 rounded-full" style="height: 70%"></div>
+            <div class="music-bar w-1.5 bg-rose-300 rounded-full" style="height: 30%"></div>
+            <div class="music-bar w-1.5 bg-rose-400 rounded-full" style="height: 55%"></div>
+            <div class="music-bar w-1.5 bg-rose-500 rounded-full" style="height: 45%"></div>
+            <div class="music-bar w-1.5 bg-rose-600 rounded-full" style="height: 65%"></div>
+            <div class="music-bar w-1.5 bg-rose-500 rounded-full" style="height: 35%"></div>
+            <div class="music-bar w-1.5 bg-rose-400 rounded-full" style="height: 50%"></div>
+            <div class="music-bar w-1.5 bg-rose-300 rounded-full" style="height: 25%"></div>
+          </div>
+
+          <!-- Play/Pause Button -->
+          <button
+            id="music-toggle"
+            class="w-16 h-16 rounded-full bg-rose-600 text-white flex items-center justify-center mx-auto glow-btn hover:bg-rose-500 transition-all duration-300 mb-4"
+            aria-label="Play or pause music"
+          >
+            <svg id="play-icon" class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg id="pause-icon" class="w-7 h-7 hidden" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+          </button>
+
+          <p class="text-rose-400 text-sm">Best experienced with headphones</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="py-12 bg-rose-950 text-center relative overflow-hidden">
+    <div class="absolute inset-0 footer-glow"></div>
+    <div class="relative z-10 px-6">
+      <svg class="w-8 h-8 text-rose-400 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      <p class="font-heading text-lg md:text-xl text-rose-200 italic mb-2">
+        Made with love for the people who make life beautiful.
+      </p>
+      <p class="text-rose-500 text-sm">Happy Rose Day 2026</p>
+    </div>
+  </footer>
+
+  <!-- ========== ROSE MODAL ========== -->
+  <div id="rose-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-6 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="absolute inset-0 bg-rose-950/60 backdrop-blur-sm" id="modal-backdrop"></div>
+    <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 md:p-10 transform scale-95 transition-transform duration-300" id="modal-content">
+      <button id="modal-close" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-rose-100 text-rose-600 hover:bg-rose-200 transition-colors duration-200" aria-label="Close modal">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="text-center">
+        <div class="w-16 h-16 rounded-full bg-rose-100 flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-rose-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <h3 class="font-heading text-2xl text-rose-900 font-semibold mb-4">A Rose for You</h3>
+        <p id="modal-message" class="font-body text-rose-700 leading-relaxed text-lg"></p>
+        <div class="mt-8">
+          <button id="modal-close-btn" class="px-6 py-2.5 bg-rose-600 text-white rounded-full font-medium hover:bg-rose-500 transition-colors duration-300 text-sm">
+            Thank You
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
