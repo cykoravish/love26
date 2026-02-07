@@ -280,10 +280,11 @@
       <div class="scroll-reveal">
         <div class="bg-white rounded-2xl shadow-lg shadow-rose-200/40 p-8 md:p-10 border border-rose-100 inline-block w-full max-w-md">
           <!-- Audio element -->
-          <audio id="bg-music" preload="auto">
-            <source src="music.mp3" type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
+          <audio id="bg-music" preload="auto"></audio>
+
+          <!-- Now Playing label -->
+          <p id="now-playing" class="text-rose-400 text-xs uppercase tracking-widest mb-1">Now Playing</p>
+          <p id="track-title" class="font-heading text-lg text-rose-800 mb-5">Select a track</p>
 
           <!-- Visualizer bars -->
           <div class="flex items-end justify-center gap-1 h-16 mb-6" id="music-visualizer">
@@ -302,21 +303,67 @@
             <div class="music-bar w-1.5 bg-rose-300 rounded-full" style="height: 25%"></div>
           </div>
 
-          <!-- Play/Pause Button -->
-          <button
-            id="music-toggle"
-            class="w-16 h-16 rounded-full bg-rose-600 text-white flex items-center justify-center mx-auto glow-btn hover:bg-rose-500 transition-all duration-300 mb-4"
-            aria-label="Play or pause music"
-          >
-            <svg id="play-icon" class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-            <svg id="pause-icon" class="w-7 h-7 hidden" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-            </svg>
-          </button>
+          <!-- Player Controls: Prev / Play-Pause / Next / Shuffle -->
+          <div class="flex items-center justify-center gap-5 mb-6">
+            <!-- Previous -->
+            <button id="prev-btn" class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center hover:bg-rose-200 transition-colors duration-200" aria-label="Previous track">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+              </svg>
+            </button>
 
-          <p class="text-rose-400 text-sm">Best experienced with headphones</p>
+            <!-- Play / Pause -->
+            <button
+              id="music-toggle"
+              class="w-16 h-16 rounded-full bg-rose-600 text-white flex items-center justify-center glow-btn hover:bg-rose-500 transition-all duration-300"
+              aria-label="Play or pause music"
+            >
+              <svg id="play-icon" class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg id="pause-icon" class="w-7 h-7 hidden" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              </svg>
+            </button>
+
+            <!-- Next -->
+            <button id="next-btn" class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center hover:bg-rose-200 transition-colors duration-200" aria-label="Next track">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+              </svg>
+            </button>
+
+            <!-- Shuffle -->
+            <button id="shuffle-btn" class="w-10 h-10 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center hover:bg-rose-200 transition-colors duration-200" aria-label="Shuffle tracks">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Track List -->
+          <div class="border-t border-rose-100 pt-5">
+            <p class="text-rose-400 text-xs uppercase tracking-widest mb-3">Playlist</p>
+            <div class="flex flex-col gap-2" id="track-list">
+              <button class="track-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl hover:bg-rose-50 transition-colors duration-200" data-index="0">
+                <span class="track-number w-6 h-6 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-xs font-medium flex-shrink-0">1</span>
+                <span class="font-body text-sm text-rose-800 flex-1">Romantic Melody</span>
+                <svg class="track-playing-icon w-4 h-4 text-rose-500 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v9.28a4.39 4.39 0 00-1.5-.28C8.01 12 6 13.79 6 16s2.01 4 4.5 4S15 18.21 15 16V6h3V3h-6z"/></svg>
+              </button>
+              <button class="track-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl hover:bg-rose-50 transition-colors duration-200" data-index="1">
+                <span class="track-number w-6 h-6 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-xs font-medium flex-shrink-0">2</span>
+                <span class="font-body text-sm text-rose-800 flex-1">Heartfelt Serenade</span>
+                <svg class="track-playing-icon w-4 h-4 text-rose-500 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v9.28a4.39 4.39 0 00-1.5-.28C8.01 12 6 13.79 6 16s2.01 4 4.5 4S15 18.21 15 16V6h3V3h-6z"/></svg>
+              </button>
+              <button class="track-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl hover:bg-rose-50 transition-colors duration-200" data-index="2">
+                <span class="track-number w-6 h-6 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-xs font-medium flex-shrink-0">3</span>
+                <span class="font-body text-sm text-rose-800 flex-1">Love in the Air</span>
+                <svg class="track-playing-icon w-4 h-4 text-rose-500 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v9.28a4.39 4.39 0 00-1.5-.28C8.01 12 6 13.79 6 16s2.01 4 4.5 4S15 18.21 15 16V6h3V3h-6z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <p class="text-rose-400 text-sm mt-5">Best experienced with headphones</p>
         </div>
       </div>
     </div>
