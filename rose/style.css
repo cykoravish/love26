@@ -1,0 +1,170 @@
+/* ===========================
+   Rose Day - Custom Styles
+   =========================== */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for cleaner look (optional) */
+body {
+  overflow-x: hidden;
+}
+
+/* ---- Hero Fade In ---- */
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-in {
+  animation: heroFadeIn 0.8s ease-out forwards;
+}
+
+/* ---- Glowing Button ---- */
+.glow-btn {
+  box-shadow:
+    0 0 20px rgba(244, 63, 94, 0.35),
+    0 0 60px rgba(244, 63, 94, 0.15);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.glow-btn:hover {
+  box-shadow:
+    0 0 30px rgba(244, 63, 94, 0.5),
+    0 0 80px rgba(244, 63, 94, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ---- Scroll Indicator ---- */
+.scroll-indicator {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+/* ---- Scroll Reveal ---- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Navbar States ---- */
+#navbar {
+  background: transparent;
+}
+
+#navbar.scrolled {
+  background: rgba(136, 19, 55, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(76, 5, 25, 0.2);
+}
+
+#navbar.scrolled .nav-brand,
+#navbar.scrolled .nav-link-color {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ---- Music Visualizer Bars ---- */
+.music-bar {
+  transition: height 0.15s ease;
+}
+
+.music-bar.playing {
+  animation: barPulse 0.6s ease-in-out infinite alternate;
+}
+
+.music-bar.playing:nth-child(1) { animation-delay: 0s; }
+.music-bar.playing:nth-child(2) { animation-delay: 0.08s; }
+.music-bar.playing:nth-child(3) { animation-delay: 0.16s; }
+.music-bar.playing:nth-child(4) { animation-delay: 0.24s; }
+.music-bar.playing:nth-child(5) { animation-delay: 0.32s; }
+.music-bar.playing:nth-child(6) { animation-delay: 0.15s; }
+.music-bar.playing:nth-child(7) { animation-delay: 0.05s; }
+.music-bar.playing:nth-child(8) { animation-delay: 0.20s; }
+.music-bar.playing:nth-child(9) { animation-delay: 0.10s; }
+.music-bar.playing:nth-child(10) { animation-delay: 0.28s; }
+.music-bar.playing:nth-child(11) { animation-delay: 0.18s; }
+.music-bar.playing:nth-child(12) { animation-delay: 0.06s; }
+.music-bar.playing:nth-child(13) { animation-delay: 0.22s; }
+
+@keyframes barPulse {
+  0% {
+    height: 15%;
+  }
+  100% {
+    height: 90%;
+  }
+}
+
+/* ---- Footer Glow ---- */
+.footer-glow {
+  background: radial-gradient(ellipse at center bottom, rgba(244, 63, 94, 0.15) 0%, transparent 70%);
+}
+
+/* ---- Modal Visible State ---- */
+#rose-modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#rose-modal.visible #modal-content {
+  transform: scale(1);
+}
+
+/* ---- Floating Petals ---- */
+@keyframes petalFall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg) translateX(80px);
+    opacity: 0;
+  }
+}
+
+.petal {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(ellipse at center, rgba(251, 113, 133, 0.6) 0%, rgba(244, 63, 94, 0.3) 100%);
+  border-radius: 50% 0 50% 0;
+  pointer-events: none;
+  animation: petalFall linear infinite;
+}
+
+/* ---- Selection Color ---- */
+::selection {
+  background: rgba(244, 63, 94, 0.2);
+  color: #881337;
+}
