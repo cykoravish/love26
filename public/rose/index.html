@@ -91,7 +91,7 @@
     <!-- Background image -->
     <div class="absolute inset-0">
       <img
-        src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=1920&q=80"
+        src="images/hero-bg.jpg"
         alt="Beautiful red roses background"
         class="w-full h-full object-cover"
       />
@@ -129,7 +129,7 @@
   </section>
 
   <!-- ========== MESSAGE SECTION ========== -->
-  <section id="message" class="py-24 md:py-32 bg-cream">
+  <section id="message" class="py-16 md:py-20 bg-cream">
     <div class="max-w-4xl mx-auto px-6">
       <div class="text-center mb-12 scroll-reveal">
         <p class="text-gold uppercase text-sm tracking-[0.2em] mb-4">A Note From the Heart</p>
@@ -156,9 +156,9 @@
   </section>
 
   <!-- ========== DIGITAL ROSES SECTION ========== -->
-  <section id="roses" class="py-24 md:py-32 bg-gradient-to-b from-cream to-rose-50">
+  <section id="roses" class="py-16 md:py-20 bg-gradient-to-b from-cream to-rose-50">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16 scroll-reveal">
+      <div class="text-center mb-10 scroll-reveal">
         <p class="text-gold uppercase text-sm tracking-[0.2em] mb-4">Pick a Rose</p>
         <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-rose-900 mb-4">Digital Roses</h2>
         <p class="font-body text-rose-600 text-lg max-w-xl mx-auto">
@@ -188,7 +188,7 @@
           <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
             <div class="aspect-[4/3] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1518882323805-05d0596e207f?w=600&q=80"
+                src="images/rose-pink.jpg"
                 alt="Pink roses in soft light"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -236,7 +236,7 @@
           <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
             <div class="aspect-[4/3] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1548460334-89b5c0e4856e?w=600&q=80"
+                src="images/rose-elegant.jpg"
                 alt="Elegant roses arrangement"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -252,7 +252,7 @@
           <div class="relative overflow-hidden rounded-2xl bg-white shadow-md shadow-rose-200/30 border border-rose-100 transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-rose-200/50">
             <div class="aspect-[4/3] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&q=80"
+                src="images/rose-garden.jpg"
                 alt="Beautiful red roses in garden"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -267,7 +267,7 @@
   </section>
 
   <!-- ========== MUSIC SECTION ========== -->
-  <section id="music" class="py-24 md:py-32 bg-rose-50">
+  <section id="music" class="py-16 md:py-20 bg-rose-50">
     <div class="max-w-2xl mx-auto px-6 text-center">
       <div class="scroll-reveal">
         <p class="text-gold uppercase text-sm tracking-[0.2em] mb-4">Set the Mood</p>
@@ -280,8 +280,8 @@
       <div class="scroll-reveal">
         <div class="bg-white rounded-2xl shadow-lg shadow-rose-200/40 p-8 md:p-10 border border-rose-100 inline-block w-full max-w-md">
           <!-- Audio element -->
-          <audio id="bg-music" preload="none">
-            <source src="https://cdn.pixabay.com/audio/2024/11/01/audio_4956b4eedc.mp3" type="audio/mpeg" />
+          <audio id="bg-music" preload="auto">
+            <source src="music.mp3" type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
 
@@ -332,7 +332,14 @@
       <p class="font-heading text-lg md:text-xl text-rose-200 italic mb-2">
         Made with love for the people who make life beautiful.
       </p>
-      <p class="text-rose-500 text-sm">Happy Rose Day 2026</p>
+      <p class="text-rose-500 text-sm mb-4">Happy Rose Day 2026</p>
+      <div class="flex items-center justify-center gap-2 text-rose-400 text-sm">
+        <span>Made by</span>
+        <a href="https://github.com/cykoravish" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-rose-300 hover:text-gold-light transition-colors duration-300 font-medium">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Ravish
+        </a>
+      </div>
     </div>
   </footer>
 
