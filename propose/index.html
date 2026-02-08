@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>One Question 💖</title>
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&display=swap"
+        rel="stylesheet">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="frontend/css/style.css">
-    
+
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 </head>
+
 <body class="min-h-screen flex items-center justify-center overflow-hidden">
-    
+
     <!-- Romantic Background -->
     <div class="romantic-bg"></div>
     <div class="hearts-container"></div>
-    
+
     <!-- Main Container -->
     <div class="container relative z-10 max-w-2xl mx-auto px-4">
-        
+
         <!-- Screen 1: Landing -->
         <div id="landing-screen" class="screen active">
             <div class="text-center space-y-8">
@@ -36,13 +40,14 @@
                     Happy Propose Day
                     <span class="sparkle">✨</span>
                 </div>
-                <h1 id="typing-text" class="text-3xl md:text-5xl font-light text-white leading-relaxed min-h-[120px]"></h1>
+                <h1 id="typing-text" class="text-3xl md:text-5xl font-light text-white leading-relaxed min-h-[120px]">
+                </h1>
                 <button onclick="showProposal()" class="btn-primary opacity-0" id="continue-btn">
                     Continue
                 </button>
             </div>
         </div>
-        
+
         <!-- Screen 2: Proposal -->
         <div id="proposal-screen" class="screen">
             <div class="text-center space-y-12">
@@ -58,19 +63,22 @@
                     Kyunki tum hi ho jo meri duniya ko khaas banati ho 💕
                 </p>
                 <div class="flex flex-col md:flex-row gap-4 justify-center">
-                    <button onclick="selectResponse('yes')" class="btn-response bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600">
+                    <button onclick="selectResponse('yes')"
+                        class="btn-response bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600">
                         Yes 💖
                     </button>
-                    <button onclick="selectResponse('no')" class="btn-response bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600">
+                    <button onclick="selectResponse('no')"
+                        class="btn-response bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600">
                         No 🤍
                     </button>
-                    <button onclick="selectResponse('maybe')" class="btn-response bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600">
+                    <button onclick="selectResponse('maybe')"
+                        class="btn-response bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600">
                         I need time 🤔
                     </button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Screen 3: Response Input -->
         <div id="response-screen" class="screen">
             <div class="max-w-lg mx-auto space-y-6">
@@ -79,63 +87,46 @@
                     Propose Day Special
                     <span class="sparkle">✨</span>
                 </div>
-                <h2 id="response-title" class="text-3xl md:text-4xl font-semibold text-white text-center romantic-glow"></h2>
+                <h2 id="response-title" class="text-3xl md:text-4xl font-semibold text-white text-center romantic-glow">
+                </h2>
                 <p id="response-subtitle" class="text-lg text-white/80 text-center italic"></p>
-                
+
                 <div class="space-y-4">
                     <div class="input-wrapper">
-                        <input 
-                            type="text" 
-                            id="user-name" 
-                            placeholder="Apna naam (optional)"
-                            class="input-field"
-                        >
+                        <input type="text" id="user-name" placeholder="Apna naam (optional)" class="input-field">
                     </div>
-                    
+
                     <div class="input-wrapper">
-                        <textarea 
-                            id="user-message" 
-                            rows="4" 
-                            placeholder="Apne dil ki baat likho yahan…"
-                            class="input-field resize-none"
-                        ></textarea>
+                        <textarea id="user-message" rows="4" placeholder="Apne dil ki baat likho yahan…"
+                            class="input-field resize-none"></textarea>
                     </div>
-                    
+
                     <!-- Send to Someone Else Toggle -->
                     <div class="send-options">
                         <label class="checkbox-label">
-                            <input 
-                                type="checkbox" 
-                                id="send-to-other" 
-                                onchange="toggleEmailField()"
-                                class="checkbox-input"
-                            >
+                            <input type="checkbox" id="send-to-other" onchange="toggleEmailField()"
+                                class="checkbox-input">
                             <span class="checkbox-text">
                                 Kisi aur ko bhi send karna hai? 📧
                             </span>
                         </label>
                     </div>
-                    
+
                     <!-- Email Field (Hidden by default) -->
                     <div id="email-field-wrapper" class="input-wrapper hidden">
-                        <input 
-                            type="email" 
-                            id="other-email" 
-                            placeholder="Unka email address"
-                            class="input-field"
-                        >
+                        <input type="email" id="other-email" placeholder="Unka email address" class="input-field">
                         <p class="help-text">
                             Don't worry, aapko bhi copy mil jayegi! 💌
                         </p>
                     </div>
-                    
+
                     <button onclick="submitResponse()" class="btn-primary w-full" id="submit-btn">
                         Send Response
                     </button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Screen 4: Success -->
         <div id="success-screen" class="screen">
             <div class="text-center space-y-6">
@@ -150,11 +141,20 @@
                 <p class="text-sm text-white/60 mt-4" id="email-status"></p>
             </div>
         </div>
-        
+
     </div>
-    
+
+    <footer
+        style="position: fixed; bottom: 0; left: 0; right: 0; text-align: center; padding: 15px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); z-index: 20; border-top: 1px solid rgba(255, 182, 193, 0.3);">
+        <p style="color: #5a2d47; font-size: 14px; margin: 0;">
+            Crafted with 💖 by
+            <a href="https://github.com/cykoravish" target="_blank"
+                style="color: #c23866; text-decoration: none; font-weight: bold;">Ravish</a>
+        </p>
+    </footer>
     <!-- Custom JS -->
     <script src="frontend/js/main.js"></script>
-    
+
 </body>
+
 </html>
