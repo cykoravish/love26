@@ -75,6 +75,14 @@ function toggleEmailField() {
     if (checkbox.checked) {
         emailWrapper.classList.remove('hidden');
         emailWrapper.style.animation = 'fadeIn 0.5s ease forwards';
+        
+        // Smooth scroll to email field
+        setTimeout(() => {
+            emailWrapper.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }, 100);
     } else {
         emailWrapper.classList.add('hidden');
         document.getElementById('other-email').value = '';
