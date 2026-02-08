@@ -4,7 +4,8 @@
 // API Configuration for production
 // const API_URL = 'https://love26.onrender.com';
 // API Configuration for production
-const API_URL = 'https://love26-production.up.railway.app';
+// const API_URL = 'https://love26-production.up.railway.app';
+const API_URL = 'https://love.cykoravish.cloud';
 
 // State Management
 let selectedResponse = '';
