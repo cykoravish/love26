@@ -14,6 +14,10 @@ const responseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    otherEmail: {
+        type: String,
+        default: null
+    },
     createdAt: {
         type: Date,
         default: Date.now

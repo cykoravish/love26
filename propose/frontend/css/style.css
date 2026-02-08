@@ -6,34 +6,65 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
     position: relative;
+    overflow-x: hidden;
 }
 
-/* Animated Gradient Background */
-.gradient-bg {
+/* Romantic Background */
+.romantic-bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+    background: linear-gradient(
+        135deg,
+        #ffc0d9 0%,
+        #ffb3d0 25%,
+        #ffa6c8 50%,
+        #ffcce0 75%,
+        #ffd9e8 100%
+    );
     z-index: 0;
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.romantic-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 192, 203, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(255, 218, 224, 0.3) 0%, transparent 50%);
+    animation: breathe 8s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Floating Hearts */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
 }
 
 /* Screen Management */
 .screen {
     display: none;
     opacity: 0;
-    animation: fadeIn 0.8s ease forwards;
+    animation: fadeIn 1s ease forwards;
 }
 
 .screen.active {
@@ -41,20 +72,57 @@ body {
 }
 
 @keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+    to { opacity: 1; }
+}
+
+/* Propose Day Badge */
+.propose-day-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.95));
+    color: #d63384;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 
+        0 4px 15px rgba(214, 51, 132, 0.2),
+        0 0 30px rgba(255, 182, 193, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 182, 193, 0.5);
+    margin-bottom: 20px;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.sparkle {
+    display: inline-block;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
 }
 
 /* Typography */
 #typing-text {
     font-weight: 300;
     letter-spacing: 0.5px;
+    color: #5a2d47;
+    text-shadow: 
+        0 2px 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.6);
 }
 
 .typing-cursor::after {
     content: '|';
     animation: blink 1s infinite;
+    color: #d63384;
 }
 
 @keyframes blink {
@@ -62,27 +130,57 @@ body {
     50% { opacity: 0; }
 }
 
+.romantic-glow {
+    color: #5a2d47;
+    text-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 40px rgba(255, 255, 255, 0.6),
+        0 2px 10px rgba(214, 51, 132, 0.3);
+}
+
 /* Buttons */
 .btn-primary {
     padding: 16px 48px;
-    background: white;
-    color: #764ba2;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c23866 100%);
+    color: white;
     font-size: 18px;
     font-weight: 600;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    box-shadow: 
+        0 8px 25px rgba(214, 51, 132, 0.3),
+        0 0 40px rgba(255, 182, 193, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 12px 35px rgba(214, 51, 132, 0.4),
+        0 0 60px rgba(255, 182, 193, 0.3);
 }
 
 .btn-primary:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
@@ -94,36 +192,158 @@ body {
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        0 0 30px rgba(255, 182, 193, 0.2);
     min-width: 160px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-response::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-response:hover::before {
+    left: 100%;
 }
 
 .btn-response:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.2),
+        0 0 50px rgba(255, 182, 193, 0.3);
 }
 
 /* Input Fields */
+.input-wrapper {
+    position: relative;
+}
+
 .input-field {
     width: 100%;
     padding: 16px 20px;
     background: rgba(255, 255, 255, 0.95);
-    border: 2px solid transparent;
-    border-radius: 12px;
+    border: 2px solid rgba(255, 182, 193, 0.3);
+    border-radius: 16px;
     font-size: 16px;
-    transition: all 0.3s ease;
+    font-family: 'Crimson Text', Georgia, serif;
+    transition: all 0.4s ease;
     outline: none;
+    color: #5a2d47;
+    box-shadow: 
+        0 4px 15px rgba(255, 182, 193, 0.1),
+        inset 0 1px 3px rgba(214, 51, 132, 0.05);
 }
 
 .input-field:focus {
-    border-color: white;
+    border-color: #d63384;
     background: white;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 8px 25px rgba(214, 51, 132, 0.15),
+        0 0 30px rgba(255, 182, 193, 0.3),
+        inset 0 1px 3px rgba(214, 51, 132, 0.1);
+    transform: translateY(-2px);
 }
 
 .input-field::placeholder {
-    color: #999;
+    color: #c97ba1;
+    font-style: italic;
+}
+
+/* Checkbox Styling */
+.send-options {
+    margin: 20px 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 182, 193, 0.3);
+    transition: all 0.3s ease;
+}
+
+.checkbox-label:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(214, 51, 132, 0.5);
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
+}
+
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #d63384;
+}
+
+.checkbox-text {
+    color: #5a2d47;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.help-text {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #c97ba1;
+    font-style: italic;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Loading Animation */
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Add this new rule after .btn-response:hover */
+#proposal-screen p {
+    color: #5a2d47;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+#response-screen h2,
+#response-screen p {
+    color: #5a2d47;
+}
+
+#success-screen h2,
+#success-screen p {
+    color: #5a2d47;
+}
+
+@keyframes spin {
+    to { transform: translateY(-50%) rotate(360deg); }
 }
 
 /* Responsive */
@@ -135,27 +355,101 @@ body {
     #typing-text {
         font-size: 1.5rem;
     }
+    
+    .propose-day-badge {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
 }
 
-/* Loading Animation */
-.loading {
-    position: relative;
+/* Create floating hearts on load */
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
 }
 
-.loading::after {
-    content: '';
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(118, 75, 162, 0.3);
-    border-top-color: #764ba2;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+@media (max-width: 768px) {
+    .btn-response {
+        width: 100%;
+    }
+    
+    #typing-text {
+        font-size: 1.5rem;
+    }
+    
+    .propose-day-badge {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+    
+    /* ADD THESE NEW LINES: */
+    .container {
+        padding: 20px;
+        max-width: 100%;
+    }
+    
+    .btn-primary {
+        padding: 14px 36px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    #proposal-screen h1 {
+        font-size: 2rem;
+    }
+    
+    #proposal-screen p {
+        font-size: 1.1rem;
+    }
+    
+    #response-screen h2 {
+        font-size: 1.8rem;
+    }
+    
+    #success-screen h2 {
+        font-size: 2rem;
+    }
+    
+    .input-field {
+        font-size: 15px;
+        padding: 14px 18px;
+    }
+    
+    #submit-btn {
+        margin-bottom: 20px;
+    }
 }
 
-@keyframes spin {
-    to { transform: translateY(-50%) rotate(360deg); }
+/* Extra small devices */
+@media (max-width: 480px) {
+    .propose-day-badge {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+    
+    #typing-text {
+        font-size: 1.2rem;
+    }
+    
+    #proposal-screen h1 {
+        font-size: 1.5rem;
+    }
+    
+    .btn-response {
+        padding: 14px 30px;
+        font-size: 16px;
+    }
 }
