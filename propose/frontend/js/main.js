@@ -232,7 +232,7 @@ function showSuccess(otherEmail) {
     
     // Email status message
     if (otherEmail) {
-        emailStatus.textContent = `Email sent to ${otherEmail} (and you got a copy too!)`;
+        emailStatus.textContent = `Email sent to ${otherEmail}`;
     } else {
         emailStatus.textContent = 'Email notification sent to the special person! 💌';
     }
