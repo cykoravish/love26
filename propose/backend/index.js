@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { connectDB } from "./db.js";
-import proposeRoutes from "./routes/propose.routes.js";
+import { connectDB } from "./src/db.js";
+import proposeRoutes from "./src/routes/propose.routes.js";
 
 dotenv.config();
 
