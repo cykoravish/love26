@@ -2,7 +2,9 @@
 // const API_URL = 'http://localhost:5000';
 
 // API Configuration for production
-const API_URL = 'https://love26.onrender.com';
+// const API_URL = 'https://love26.onrender.com';
+// API Configuration for production
+const API_URL = 'https://love26-production.up.railway.app';
 
 // State Management
 let selectedResponse = '';
