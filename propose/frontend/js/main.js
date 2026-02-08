@@ -1,6 +1,8 @@
-// API Configuration
-const API_URL = 'http://localhost:5000'; // Replace with your Render URL
-// Example: https://one-question-api.onrender.com
+// API Configuration for local
+// const API_URL = 'http://localhost:5000';
+
+// API Configuration for production
+const API_URL = 'https://love26.onrender.com';
 
 // State Management
 let selectedResponse = '';
