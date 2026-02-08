@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Question 💖</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="frontend/css/style.css">
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center overflow-hidden">
+    
+    <!-- Background Gradient -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Main Container -->
+    <div class="container relative z-10 max-w-2xl mx-auto px-4">
+        
+        <!-- Screen 1: Landing -->
+        <div id="landing-screen" class="screen active">
+            <div class="text-center space-y-8">
+                <h1 id="typing-text" class="text-3xl md:text-5xl font-light text-white leading-relaxed min-h-[120px]"></h1>
+                <button onclick="showProposal()" class="btn-primary opacity-0" id="continue-btn">
+                    Continue
+                </button>
+            </div>
+        </div>
+        
+        <!-- Screen 2: Proposal -->
+        <div id="proposal-screen" class="screen">
+            <div class="text-center space-y-12">
+                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">
+                    Will you be my girlfriend?
+                </h1>
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <button onclick="selectResponse('yes')" class="btn-response bg-pink-500 hover:bg-pink-600">
+                        Yes 💖
+                    </button>
+                    <button onclick="selectResponse('no')" class="btn-response bg-gray-500 hover:bg-gray-600">
+                        No 🤍
+                    </button>
+                    <button onclick="selectResponse('maybe')" class="btn-response bg-purple-500 hover:bg-purple-600">
+                        I need time 🤔
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Screen 3: Response Input -->
+        <div id="response-screen" class="screen">
+            <div class="max-w-lg mx-auto space-y-6">
+                <h2 id="response-title" class="text-3xl md:text-4xl font-semibold text-white text-center"></h2>
+                <p id="response-subtitle" class="text-lg text-white/80 text-center"></p>
+                
+                <div class="space-y-4">
+                    <input 
+                        type="text" 
+                        id="user-name" 
+                        placeholder="Your name (optional)"
+                        class="input-field"
+                    >
+                    <textarea 
+                        id="user-message" 
+                        rows="4" 
+                        placeholder="Say something back…"
+                        class="input-field resize-none"
+                    ></textarea>
+                    <button onclick="submitResponse()" class="btn-primary w-full" id="submit-btn">
+                        Send Response
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Screen 4: Success -->
+        <div id="success-screen" class="screen">
+            <div class="text-center space-y-6">
+                <div class="text-6xl mb-4" id="success-emoji">💖</div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white" id="success-title"></h2>
+                <p class="text-lg text-white/80" id="success-message"></p>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- Custom JS -->
+    <script src="frontend/js/main.js"></script>
+    
+</body>
+</html>
