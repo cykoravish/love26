@@ -1,5 +1,5 @@
 // API Configuration
-const API_URL = 'YOUR_RENDER_BACKEND_URL'; // Replace with your Render URL
+const API_URL = 'http://localhost:5000'; // Replace with your Render URL
 // Example: https://one-question-api.onrender.com
 
 // State Management
