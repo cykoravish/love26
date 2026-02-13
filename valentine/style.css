@@ -1,0 +1,938 @@
+/* ================================
+   Single Screen Layout - All Days Visible
+   ================================ */
+
+:root {
+    --bg-primary: #ffe6f0;
+    --bg-card: #fff0f5;
+    --text-primary: #c2185b;
+    --accent: #ff4d88;
+    --accent-deep: #a3004f;
+    --white: #ffffff;
+    --shadow-soft: 0 4px 16px rgba(194, 24, 91, 0.08);
+    --shadow-medium: 0 8px 24px rgba(194, 24, 91, 0.12);
+    --shadow-glow: 0 0 30px rgba(255, 77, 136, 0.3);
+    
+    --font-heading: 'Dancing Script', cursive;
+    --font-subheading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ================================
+   Cursor Effect
+   ================================ */
+
+.cursor-glow {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 77, 136, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .cursor-glow {
+        display: block;
+    }
+    body:hover .cursor-glow {
+        opacity: 1;
+    }
+}
+
+/* ================================
+   Background Hearts
+   ================================ */
+
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.heart-particle {
+    position: absolute;
+    font-size: 16px;
+    opacity: 0.06;
+    filter: blur(1px);
+    animation: floatHeart 25s infinite ease-in-out;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.06;
+    }
+    90% {
+        opacity: 0.06;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ================================
+   Music Control
+   ================================ */
+
+.music-control {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-medium);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+}
+
+.music-icon {
+    font-size: 24px;
+}
+
+.music-icon.muted {
+    display: none;
+}
+
+.music-control.is-muted .music-icon.playing {
+    display: none;
+}
+
+.music-control.is-muted .music-icon.muted {
+    display: block;
+}
+
+.music-control.is-playing {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 77, 136, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(255, 77, 136, 0);
+    }
+}
+
+/* ================================
+   Main Container - Single Screen
+   ================================ */
+
+.main-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 12px;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .main-container {
+        padding: 20px;
+        gap: 15px;
+    }
+}
+
+/* ================================
+   Header Section
+   ================================ */
+
+.header-section {
+    text-align: center;
+    padding: 12px 15px;
+    background: rgba(255, 240, 245, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    z-index: 10;
+}
+
+@media (min-width: 768px) {
+    .header-section {
+        padding: 15px 20px;
+        border-radius: 20px;
+    }
+}
+
+.main-title {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    color: var(--accent-deep);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+    .main-title {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-title {
+        font-size: 42px;
+    }
+}
+
+.name-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.name-input {
+    padding: 8px 16px;
+    border: 2px solid rgba(194, 24, 91, 0.2);
+    border-radius: 25px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--text-primary);
+    background: var(--white);
+    outline: none;
+    width: 180px;
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .name-input {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 220px;
+    }
+}
+
+.name-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 77, 136, 0.1);
+}
+
+.welcome-text {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--accent-deep);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .welcome-text {
+        font-size: 20px;
+    }
+}
+
+.welcome-text.show {
+    opacity: 1;
+}
+
+.easter-egg-heart {
+    font-size: 20px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .easter-egg-heart {
+        font-size: 24px;
+    }
+}
+
+.easter-egg-heart:hover {
+    transform: scale(1.2);
+}
+
+.secret-message {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    margin-top: 8px;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, rgba(255, 77, 136, 0.15), rgba(163, 0, 79, 0.15));
+    border-radius: 12px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+@media (min-width: 768px) {
+    .secret-message {
+        font-size: 13px;
+        padding: 12px 18px;
+    }
+}
+
+.secret-message.revealed {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+/* ================================
+   Days Grid
+   ================================ */
+
+.days-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    overflow: auto;
+    padding: 5px;
+}
+
+@media (min-width: 768px) {
+    .days-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .days-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+    }
+}
+
+/* ================================
+   Day Cards
+   ================================ */
+
+.day-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .day-card {
+        padding: 18px;
+        gap: 10px;
+        border-radius: 20px;
+    }
+}
+
+.day-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+}
+
+.day-number {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+@media (min-width: 768px) {
+    .day-number {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        top: 10px;
+        left: 12px;
+    }
+}
+
+.day-title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    color: var(--accent-deep);
+    font-weight: 700;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .day-title {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .day-title {
+        font-size: 26px;
+    }
+}
+
+.day-emoji {
+    font-size: 40px;
+    transition: all 0.4s ease;
+}
+
+@media (min-width: 768px) {
+    .day-emoji {
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .day-emoji {
+        font-size: 60px;
+    }
+}
+
+.day-card:hover .day-emoji {
+    transform: scale(1.1);
+}
+
+.day-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: white;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 768px) {
+    .day-btn {
+        padding: 10px 24px;
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .day-btn {
+        font-size: 14px;
+    }
+}
+
+.day-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.day-btn:active {
+    transform: translateY(0);
+}
+
+.day-message {
+    font-size: 11px;
+    color: var(--text-primary);
+    text-align: center;
+    font-family: var(--font-subheading);
+    font-style: italic;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+@media (min-width: 768px) {
+    .day-message {
+        font-size: 12px;
+    }
+}
+
+.day-message.show {
+    opacity: 1;
+    height: auto;
+    margin-top: 5px;
+}
+
+.day-hint {
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+@media (min-width: 768px) {
+    .day-hint {
+        font-size: 11px;
+    }
+}
+
+/* ================================
+   Specific Day Styles
+   ================================ */
+
+/* Rose Day */
+.rose-day .day-emoji {
+    animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+/* Propose Day */
+.propose-question {
+    font-size: 12px;
+    font-family: var(--font-subheading);
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .propose-question {
+        font-size: 13px;
+    }
+}
+
+.propose-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.no-btn {
+    background: linear-gradient(135deg, rgba(194, 24, 91, 0.6), rgba(163, 0, 79, 0.6));
+}
+
+/* Chocolate Day */
+.chocolate-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.chocolate-lid {
+    font-size: 50px;
+    transition: all 0.8s ease;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .chocolate-lid {
+        font-size: 60px;
+    }
+}
+
+.chocolate-box.opened .chocolate-lid {
+    transform: translateY(-60px) rotate(20deg);
+    opacity: 0;
+}
+
+.chocolate-msg {
+    font-size: 11px;
+    font-family: var(--font-subheading);
+    font-style: italic;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.6s ease;
+    max-width: 200px;
+}
+
+@media (min-width: 768px) {
+    .chocolate-msg {
+        font-size: 12px;
+    }
+}
+
+.chocolate-box.opened .chocolate-msg {
+    opacity: 1;
+}
+
+/* Teddy Day */
+.teddy-emoji {
+    cursor: pointer;
+}
+
+.teddy-emoji:hover {
+    filter: drop-shadow(0 0 20px rgba(255, 77, 136, 0.4));
+}
+
+/* Promise Day */
+.promise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.promise-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .promise-item {
+        gap: 8px;
+        font-size: 11px;
+    }
+}
+
+.promise-check {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    cursor: pointer;
+    appearance: none;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+    .promise-check {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.promise-check:checked {
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    border-color: var(--accent-deep);
+}
+
+.promise-check:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Hug Day */
+.hug-avatars {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.8s ease;
+}
+
+@media (min-width: 768px) {
+    .hug-avatars {
+        gap: 40px;
+    }
+}
+
+.avatar {
+    font-size: 40px;
+}
+
+@media (min-width: 768px) {
+    .avatar {
+        font-size: 50px;
+    }
+}
+
+.hug-avatars.hugging {
+    gap: 0px;
+}
+
+/* Kiss Day */
+.kiss-canvas {
+    width: 100%;
+    min-height: 80px;
+    position: relative;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .kiss-canvas {
+        min-height: 100px;
+    }
+}
+
+.kiss-mark,
+.kiss-heart {
+    position: absolute;
+    font-size: 20px;
+    pointer-events: none;
+    animation: fadeOut 2s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(360deg);
+    }
+}
+
+/* Valentine's Day */
+.valentine-day {
+    grid-column: span 2;
+}
+
+@media (min-width: 768px) {
+    .valentine-day {
+        grid-column: span 1;
+    }
+}
+
+.valentine-text {
+    font-family: var(--font-subheading);
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .valentine-text {
+        font-size: 14px;
+    }
+}
+
+/* ================================
+   Footer Section
+   ================================ */
+
+.footer-section {
+    padding: 12px 15px;
+    background: linear-gradient(135deg, rgba(255, 77, 136, 0.12), rgba(163, 0, 79, 0.12));
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .footer-section {
+        padding: 15px 20px;
+        border-radius: 20px;
+    }
+}
+
+.footer-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 77, 136, 0.08) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.dedication-box {
+    position: relative;
+    z-index: 1;
+}
+
+.dedication-text {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    color: var(--accent-deep);
+    line-height: 1.6;
+    margin-bottom: 6px;
+}
+
+@media (min-width: 768px) {
+    .dedication-text {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .dedication-text {
+        font-size: 20px;
+    }
+}
+
+.tagline {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    color: var(--accent-deep);
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .tagline {
+        font-size: 19px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .tagline {
+        font-size: 22px;
+    }
+}
+
+/* ================================
+   Effects Containers
+   ================================ */
+
+.petals-container,
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.petal {
+    position: absolute;
+    font-size: 20px;
+    animation: fall 4s ease-out forwards;
+}
+
+@keyframes fall {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 24px;
+    animation: floatUp 2s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(1);
+    }
+}
+
+/* ================================
+   Scrollbar Styling
+   ================================ */
+
+.days-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.days-grid::-webkit-scrollbar-track {
+    background: rgba(194, 24, 91, 0.05);
+    border-radius: 10px;
+}
+
+.days-grid::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+
+.days-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-deep);
+}
+
+/* ================================
+   Mobile Optimizations
+   ================================ */
+
+@media (max-width: 767px) {
+    .days-grid {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ================================
+   Print Styles
+   ================================ */
+
+@media print {
+    .music-control,
+    .cursor-glow,
+    .floating-hearts {
+        display: none !important;
+    }
+}
